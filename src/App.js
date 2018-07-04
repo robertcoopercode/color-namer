@@ -188,15 +188,17 @@ class App extends Component {
             </div>
           </div>
           <span className="color-name">{this.state.currentColor.name}</span>
-          <div id="picker-wrapper">
-              <div id="picker"></div>
-              <div id="picker-indicator"></div>
+          <input className="color-input" value={this.state.value} onChange={this.handleColorChange} />
+          <div className="color-picker">
+              <div id="picker-wrapper">
+                  <div id="picker"></div>
+                  <div id="picker-indicator"></div>
+              </div>
+              <div id="slider-wrapper">
+                  <div id="slider"></div>
+                  <div id="slider-indicator"></div>
+              </div>
           </div>
-          <div id="slider-wrapper">
-              <div id="slider"></div>
-              <div id="slider-indicator"></div>
-          </div>
-          <input value={this.state.value} onChange={this.handleColorChange} />
         {/*<LambdaDemo/>*/}
       </div>
     );
