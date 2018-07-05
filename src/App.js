@@ -117,6 +117,7 @@ class App extends Component {
     render() {
     return (
       <div className="color-namer">
+          <a className="github-badge-link" href="https://github.com/robertcoopercode/color-namer"><span className="github-badge">View the Code</span></a>
           <h1 className="color-namer__title">Color Namer</h1>
           <span className="color-namer__name">{this.state.currentColor.name}</span>
           <div className="color-namer__preview-container">
@@ -143,6 +144,25 @@ class App extends Component {
             </div>
           </div>
           <input className="color-input" placeholder={this.state.currentColor.hexValue} onChange={this.handleColorChange} />
+          <div className="color-namer__bottom-container">
+              <div className="bottom-container-section  bottom-container-section--features">
+                  <h3 className="bottom-container-section__title">Features</h3>
+                  <ul className="bottom-container-section__list">
+                      <li className="bottom-container-section__item">Over 15,000 color names</li>
+                      <li className="bottom-container-section__item">Accepts both hex and rgb formats</li>
+                      <li className="bottom-container-section__item">Color picker</li>
+                  </ul>
+              </div>
+              <div className="bottom-container-section  bottom-container-section--instructions">
+                  <h3 className="bottom-container-section__title">Accepted input formats</h3>
+                  <ul className="bottom-container-section__list">
+                      <li className="bottom-container-section__item">hex with hash (e.g. <span className="bottom-container-section__highlight">#323</span> or <span className="bottom-container-section__highlight">#332233</span>)</li>
+                      <li className="bottom-container-section__item">hex without hash (e.g. <span className="bottom-container-section__highlight">323</span> or <span className="bottom-container-section__highlight">332233</span>)</li>
+                      <li className="bottom-container-section__item">rgb (e.g. <span className="bottom-container-section__highlight">rgb(103, 33, 158)</span>)</li>
+                      <li className="bottom-container-section__item">name (e.g. <span className="bottom-container-section__highlight">red</span>)</li>
+                  </ul>
+              </div>
+          </div>
         {/*<LambdaDemo/>*/}
       </div>
     );

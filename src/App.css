@@ -23,6 +23,21 @@ body {
     color: #6FFFE9;
 }
 
+.github-badge {
+    position: absolute;
+    right: -45px;
+    top: -16px;
+    transform: rotate(30deg);
+    transform-origin: top left;
+    width: 150px;
+    height: 15px;
+    background-color: #6FFFE9;
+    text-align: center;
+    color: #0B132B;
+    font-size: 12px;
+    line-height: 15px;
+} 
+
 .color-namer__title {
     font-size: 40px;
     letter-spacing: 2px;
@@ -115,6 +130,7 @@ body {
     border-bottom: 3px solid #6FFFE9;
     color: #6FFFE9;
     font-weight: 300;
+    margin-bottom: 100px;
 }
 
 .color-input:focus {
@@ -124,4 +140,33 @@ body {
 .color-input::placeholder {
     color: #3c7d90;
     font-weight: 300;
+}
+
+.color-namer__bottom-container {
+    display: flex;
+}
+
+.bottom-container-section__title {
+    font-weight: 400;
+}
+
+.bottom-container-section__list {
+    letter-spacing: 0.6px;
+    margin: 0;
+    padding: 0 15px;
+    font-size: 14px;
+    line-height: 26px;
+    font-weight: 300;
+}
+
+.bottom-container-section--features {
+    margin-right: 40px;
+}
+
+.bottom-container-section__highlight {
+    color: #FFF5B2;
+}
+
+.bottom-container-section__link {
+    color: #6FFFE9;
 }
