@@ -2607,10 +2607,6 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flexi-color-picker@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/flexi-color-picker/-/flexi-color-picker-1.0.1.tgz#43307d57f012b8f175f62b999c700d828829ceb8"
-
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"

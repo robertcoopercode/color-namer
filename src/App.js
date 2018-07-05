@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import nearestColor from 'nearest-color';
 import tinycolor from 'tinycolor2';
-import 'flexi-color-picker';
 
 class LambdaDemo extends Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class App extends Component {
         currentColor: {
             name: null,
             Value: null,
-            hexValue: null,
+            hexValue: '',
             rgbValue: null,
         }
     }
@@ -50,31 +49,6 @@ class App extends Component {
                 this.getColors(response.colors);
             })
 
-        // eslint-disable-next-line
-        this.colorPicker = ColorPicker(
-
-            document.getElementById('slider'),
-            document.getElementById('picker'),
-
-            (hex, hsv, rgb, pickerCoordinate, sliderCoordinate) => {
-                // this.updateColor(null, hex);
-                // eslint-disable-next-line
-                ColorPicker.positionIndicators(
-                    document.getElementById('slider-indicator'),
-                    document.getElementById('picker-indicator'),
-                    sliderCoordinate, pickerCoordinate
-                );
-
-                document.body.style.backgroundColor = hex;
-
-                this.updateColor(null, hex);
-            });
-
-        // eslint-disable-next-line
-        ColorPicker.fixIndicators(
-            document.getElementById('slider-indicator'),
-            document.getElementById('picker-indicator'));
-        
         // if ( !Modernizr.inputtypes.color ) {
         //     const $c = document.querySelector("input[type='color']");
         //     $c.classList.add("{hash:true}");
@@ -95,8 +69,6 @@ class App extends Component {
         });
         this.setState({nearestColors: nearestColor.from(mappedColors)});
 
-        
-
         const hash = window.location && window.location.hash;
 
         if (hash) {
@@ -116,7 +88,6 @@ class App extends Component {
     
     handleColorChange = (event) => {
         this.updateColor(event);
-        // if (this.updateColor(event) != false) { return this.colorPicker.setHex(this.state.currentColor.hexValue)};
     }
 
     updateColor = (event, value) => {
@@ -125,12 +96,10 @@ class App extends Component {
 
         const colorValue = value || event.target.value;
             
-        console.log(colorValue)
         if( !tinycolor(colorValue).isValid() ){
             return false;
         }
 
-        console.log('valid!')
         let color = this.state.nearestColors(tinycolor(colorValue).toHexString());
         
         this.setState({
@@ -141,8 +110,6 @@ class App extends Component {
                 rgbValue: `rgb(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b})`,
             }
         })
-
-        
 
         let complement = tinycolor(colorValue).complement();
         this.setState((previousState) => {
@@ -173,32 +140,33 @@ class App extends Component {
     
     render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Color Namer</h1>
-        </header>
-          <div className="color-value-container">
-            <div className="color-value  color-value--hex">
-              <span  className="color-value__label">hex</span>
-              <span className="color-value__value">{this.state.currentColor.hexValue}</span>
+      <div className="color-namer">
+          <h1 className="color-namer__title">Color Namer</h1>
+          <span className="color-namer__name">{this.state.currentColor.name}</span>
+          <div className="color-namer__preview-container">
+              <div 
+                  className="color-namer__preview"
+                  style={{
+                          backgroundColor: this.state.currentColor.hexValue
+                  }} 
+              >
+                <input className="color-namer__color-input" type="color" onChange={this.handleColorChange} value={this.state.currentColor.hexValue} />
+              </div>
+              <span className="color-namer__preview-info">
+                  {'< click for a color picker'}
+              </span>
+          </div>
+          <div className="color-namer__value-container">
+            <div className="color-namer__value  color-namer__value--hex">
+              <span  className="color-namer__value-label">hex</span>
+              <span className="color-namer__value-text">{this.state.currentColor.hexValue}</span>
             </div>
-            <div className="color-value  color-value--rgb">
-              <span  className="color-value__label">rgb</span>
-              <span className="color-value__value">{this.state.currentColor.rgbValue}</span>
+            <div className="color-namer__value  color-namer__value--rgb">
+              <span  className="color-namer__value-label">rgb</span>
+              <span className="color-namer__value-text">{this.state.currentColor.rgbValue}</span>
             </div>
           </div>
-          <span className="color-name">{this.state.currentColor.name}</span>
           <input className="color-input" value={this.state.value} onChange={this.handleColorChange} />
-          <div className="color-picker">
-              <div id="picker-wrapper">
-                  <div id="picker"></div>
-                  <div id="picker-indicator"></div>
-              </div>
-              <div id="slider-wrapper">
-                  <div id="slider"></div>
-                  <div id="slider-indicator"></div>
-              </div>
-          </div>
         {/*<LambdaDemo/>*/}
       </div>
     );

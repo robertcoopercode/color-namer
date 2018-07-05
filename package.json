@@ -3,7 +3,6 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "flexi-color-picker": "^1.0.1",
     "nearest-color": "^0.4.2",
     "netlify-lambda": "^0.4.0",
     "react": "^16.3.1",
