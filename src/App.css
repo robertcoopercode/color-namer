@@ -120,3 +120,8 @@ body {
 .color-input:focus {
     outline: none;
 }
+
+.color-input::placeholder {
+    color: #3c7d90;
+    font-weight: 300;
+}

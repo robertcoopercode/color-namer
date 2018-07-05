@@ -34,7 +34,6 @@ class App extends Component {
         timer: 0,
         currentColor: {
             name: null,
-            Value: null,
             hexValue: '',
             rgbValue: null,
         }
@@ -95,8 +94,12 @@ class App extends Component {
         // this.setState({timer: setTimeout(() => { window.location.hash = colorValue }, 500)});
 
         const colorValue = value || event.target.value;
-            
-        if( !tinycolor(colorValue).isValid() ){
+
+        
+        let validFormat = (tinycolor(colorValue).getFormat() === 'name' || tinycolor(colorValue).getFormat() === 'rgb' || tinycolor(colorValue).getFormat() === 'hex');
+        let validColor = tinycolor(colorValue).isValid();
+        
+        if( !validColor || !validFormat){
             return false;
         }
 
@@ -105,35 +108,8 @@ class App extends Component {
         this.setState({
             currentColor: {
                 name: color.name,
-                Value: colorValue,
-                hexValue: color.value,
-                rgbValue: `rgb(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b})`,
-            }
-        })
-
-        let complement = tinycolor(colorValue).complement();
-        this.setState((previousState) => {
-            return {
-                currentColor: {
-                    ...previousState.currentColor,
-                    contrastValue: tinycolor.mostReadable(colorValue, [
-                        complement.toHexString(),
-                        complement.saturate(20).toHexString(),
-                        complement.saturate(30).toHexString(),
-                        complement.brighten(20).toHexString(),
-                        complement.brighten(30).toHexString(),
-                        complement.darken(20).toHexString(),
-                        complement.darken(30).toHexString(),
-                        complement.lighten(20).toHexString(),
-                        complement.lighten(30).toHexString(),
-                        complement.desaturate(20).toHexString(),
-                        complement.desaturate(30).toHexString(),
-                    ],{
-                        includeFallbackColors:true,
-                        level:"A",
-                        size:"small"
-                    }).toHexString()
-                }
+                hexValue:  tinycolor(colorValue).toHexString(),
+                rgbValue:  tinycolor(colorValue).toRgbString(),
             }
         })
     }
@@ -166,7 +142,7 @@ class App extends Component {
               <span className="color-namer__value-text">{this.state.currentColor.rgbValue}</span>
             </div>
           </div>
-          <input className="color-input" value={this.state.value} onChange={this.handleColorChange} />
+          <input className="color-input" placeholder={this.state.currentColor.hexValue} onChange={this.handleColorChange} />
         {/*<LambdaDemo/>*/}
       </div>
     );
