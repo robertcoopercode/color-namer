@@ -1,39 +1,17 @@
-This project is based on [Create React App](https://github.com/facebookincubator/create-react-app). (For more information about Create react App, check their full [documentation](https://github.com/facebookincubator/create-react-app#create-react-app).)
+# Color Namer
 
-The main addition is a new folder: `src/lambda`. Each JavaScript file in there will automatically be prepared for Lambda function deployment.
+>"Naming colors has never been this easy!"
+> \- **_Abraham Linkoln_**
 
-As an example, we've included a small `src/lambda/hello.js` function, which will be deployed to `/.netlify/functions/hello`.
+This is a web app that provides a name for a color. EZPZ.
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify/create-react-app-lambda)
+**Example**
 
-## Babel/webpack compilation
+If you enter **
 
-All functions are compiled with webpack using the Babel Loader, so you can use modern JavaScript, import npm modules, etc., without any extra setup.
+Color formats accepted:
+- hex with hash (e.g. **#323** or **#332233**)
+- hex without hash (e.g. **323** or **332233**)
+- rgb (e.g. **rgb(103, 33, 158)**)
+- supported CSS color names (e.g. red)
 
-## Local Development
-
-Before developing, clone the repository and run `yarn` from the root of the repo to install all dependencies.
-
-### Run the functions dev server
-
-From inside the project folder, run:
-
-```
-yarn start:lambda
-```
-
-This will open a local server running at `http://localhost:9000` serving your Lambda functions, updating as you make changes in the `src/lambda` folder.
-
-You can then access your functions directly at `http://localhost:9000/{function_name}`, but to access them with the app, you'll need to start the app dev server.
-
-### Run the app dev server
-
-While the functions server is still running, open a new terminal tab and run:
-
-```
-yarn start
-```
-
-This will start the normal create-react-app dev server and open your app at `http://localhost:3000`.
-
-Local in-app requests to the relative path `/.netlify/functions/*` will automatically be proxied to the local functions dev server.
