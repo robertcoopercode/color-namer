@@ -3730,6 +3730,10 @@ jschardet@^1.4.2:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/jschardet/-/jschardet-1.6.0.tgz#c7d1a71edcff2839db2f9ec30fc5d5ebd3c1a678"
 
+jscolor-picker@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/jscolor-picker/-/jscolor-picker-2.0.4.tgz#4feac9297f44442c89a5688de4ccf685f19a06b4"
+
 jsdom@^9.12.0:
   version "9.12.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-9.12.0.tgz#e8c546fffcb06c00d4833ca84410fed7f8a097d4"
