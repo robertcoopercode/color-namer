@@ -1,9 +1,9 @@
 # Color Namer
 
 >"Naming colors has never been this easy!"
-> \- **_Abraham Linkoln_**
+> \- **_Abraham Lincoln_**
 
-This is a web app that provides a name for a color. EZPZ.
+A [web app](colornamer.netlify.com) that provides a name for a color. EZPZ.
 
 ![App Screenshot](./screenshot.png)
 
@@ -26,7 +26,7 @@ Who the hell knows? 🤷‍"_
 - hex with hash (e.g. **#323** or **#332233**)
 - hex without hash (e.g. **323** or **332233**)
 - rgb (e.g. **rgb(103, 33, 158)**)
-- supported CSS color names (e.g. red)
+- supported CSS color names (e.g. **red**)
 
 ## Dependencies
 - **[nearest-color](https://github.com/dtao/nearest-color)** - Utility to find nearest matching color 

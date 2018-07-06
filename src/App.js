@@ -55,6 +55,8 @@ class App extends Component {
                 this.updateColor(event, color)
             }
         }
+
+        this.colorInput.focus();
     }
     
     updateColor = (event, value) => {
@@ -128,7 +130,7 @@ class App extends Component {
                       <div></div>
                   </div>
               }
-              <input className="color-input" placeholder={this.state.currentColor.hexValue} onChange={this.updateColor} ref={(input) => this.colorInput = input}/>
+              <input className="color-input" autocomplete="off" placeholder={this.state.currentColor.hexValue} onChange={this.updateColor} ref={(input) => this.colorInput = input}/>
           </div>
           <div className="color-namer__bottom-container">
               <div className="bottom-container-section  bottom-container-section--features">
