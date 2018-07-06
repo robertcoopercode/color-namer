@@ -25,17 +25,6 @@ class App extends Component {
             .then((response) => {
                 this.getColors(response.colors);
             })
-        if ( !Modernizr.inputtypes.color ) {
-            this.isInputTypeSupported = false;
-            new jscolor(document.querySelector('.color-namer__color-input'));
-            document.querySelector('.color-namer__color-input').setAttribute('onchange', 'updateColor(this.jscolor)');
-            window.updateColor = (event) => {
-                let color = tinycolor(document.querySelector('.color-namer__color-input').style['background-color']).toHexString();
-                this.updateColor(event, color)
-            }
-        } else {
-            this.isInputTypeSupported = true;
-        }
     }
 
     getColors = (colors) => {
@@ -55,7 +44,18 @@ class App extends Component {
         }
         
         this.setState({isLoading: false});
-        this.colorInput.focus();
+
+        if ( !Modernizr.inputtypes.color ) {
+            this.isInputTypeSupported = false;
+            new jscolor(document.querySelector('.color-namer__color-input'));
+            document.querySelector('.color-namer__color-input').setAttribute('onchange', 'updateColor(this.jscolor)');
+            window.updateColor = (event) => {
+                let color = tinycolor(document.querySelector('.color-namer__color-input').style['background-color']).toHexString();
+                this.updateColor(event, color)
+            }
+        } else {
+            this.isInputTypeSupported = true;
+        }
     }
     
     updateColor = (event, value) => {
@@ -108,8 +108,8 @@ class App extends Component {
                               }
                           </div>
                           <span className="color-namer__preview-info">
-                  {'< click for a color picker'}
-              </span>
+                              {'< click for a color picker'}
+                          </span>
                       </div>
                       <div className="color-namer__value-container">
                           <div className="color-namer__value  color-namer__value--hex">
