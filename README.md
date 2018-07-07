@@ -5,7 +5,7 @@
 
 A [web app](colornamer.netlify.com) that provides a name for a color. EZPZ.
 
-![App Screenshot](./screenshot.png)
+![Example usage GIF](./example.gif)
 
 ## Key Features
 - Over 15,000 color names ⚡️
