@@ -41,7 +41,7 @@ class App extends Component {
         if (hash) {
             this.updateColor(null, hash);
         } else {
-            this.updateColor(null, '#'+Math.floor(Math.random()*16777215).toString(16));
+            this.updateColor(null, '#' + ('000000' + (Math.random()*0xFFFFFF<<0).toString(16)).slice(-6));
         }
         
         this.setState({isLoading: false});
@@ -130,7 +130,7 @@ class App extends Component {
                       <div></div>
                   </div>
               }
-              <input className="color-input" autocomplete="off" placeholder={this.state.currentColor.hexValue} onChange={this.updateColor} ref={(input) => this.colorInput = input}/>
+              <input className="color-input" autoComplete="off" autoCapitalize="off" placeholder={this.state.currentColor.hexValue} onChange={this.updateColor} ref={(input) => this.colorInput = input}/>
           </div>
           <div className="color-namer__bottom-container">
               <div className="bottom-container-section  bottom-container-section--features">
