@@ -1,20 +1,27 @@
 {
-  "name": "color-namer",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "jscolor-picker": "^2.0.4",
-    "nearest-color": "^0.4.2",
-    "netlify-lambda": "^0.4.0",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4",
-    "tinycolor2": "^1.4.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "color-namer",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "jscolor-picker": "^2.0.4",
+        "nearest-color": "^0.4.2",
+        "netlify-lambda": "^0.4.0",
+        "react": "^16.3.1",
+        "react-dom": "^16.3.1",
+        "react-scripts": "1.1.4",
+        "tinycolor2": "^1.4.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --env=jsdom",
+        "eject": "react-scripts eject"
+    },
+    "devDependencies": {
+        "eslint": "^5.3.0",
+        "eslint-config-prettier": "^2.9.0",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-react": "^7.9.1",
+        "prettier": "^1.14.0"
+    }
 }
