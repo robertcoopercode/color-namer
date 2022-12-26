@@ -252,7 +252,8 @@ body {
     white-space: nowrap;
 }
 
-.color-input {
+.color-input,
+.list-select {
     padding: 10px;
     letter-spacing: 1.6px;
     border: none;
@@ -266,8 +267,20 @@ body {
     border-radius: 0;
 }
 
+.list-select {
+    display: block;
+    width: 330px;
+    margin-bottom: 20px;
+}
+
+.color-namer__list-label {
+    margin-top: 30px;
+    display: block;
+}
+
 @media (min-width: 700px) {
-    .color-input {
+    .color-input,
+    .list-select {
         font-size: 20px;
         letter-spacing: 1.6px;
     }

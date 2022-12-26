@@ -15,11 +15,42 @@ class App extends Component {
             hexValue: '',
             rgbValue: null,
         },
+        colorList: 'default',
         isInputTypeSupported: true,
+        possibleColorLists: ['default'],
+        listDescriptions: {
+            default: {
+                title: 'Default',
+                description: 'The default color list',
+            },
+        },
     };
 
     componentDidMount() {
-        fetch('https://api.color.pizza/v1/')
+        this.fetchFromAPI();
+    }
+
+    setNewColorList = (event) => {
+        this.setState({ colorList: event.target.value });
+        this.fetchFromAPI();
+    };
+
+    fetchFromAPI = () => {
+        this.setState({ isLoading: true });
+
+        fetch('https://api.color.pizza/v1/lists/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                console.log(response);
+                this.setState({
+                    possibleColorLists: response.availableColorNameLists,
+                    listDescriptions: response.listDescriptions,
+                });
+            });
+
+        fetch(`https://api.color.pizza/v1/?list=${this.state.colorList}`)
             .then((response) => {
                 return response.json();
             })
@@ -161,13 +192,30 @@ class App extends Component {
                         onChange={this.updateColor}
                         ref={(input) => (this.colorInput = input)}
                     />
+                    <div className="color-namer__lists">
+                        <label className="color-namer__list-label">
+                            <strong>Color List</strong>
+                            <select
+                                className="list-select"
+                                value={this.colorList}
+                                onChange={this.setNewColorList}
+                            >
+                                {this.state.possibleColorLists.map(list => (
+                                    <option key={list} value={list}>
+                                        {this.state.listDescriptions[list].title}
+                                        &nbsp;({this.state.listDescriptions[list].colorCount})
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    </div>
                 </div>
                 <div className="color-namer__bottom-container">
                     <div className="bottom-container-section  bottom-container-section--features">
                         <h3 className="bottom-container-section__title">Features</h3>
                         <ul className="bottom-container-section__list">
                             <li className="bottom-container-section__item">
-                                Over 15,000 color names
+                                Over 30,000 color names
                             </li>
                             <li className="bottom-container-section__item">
                                 Accepts both hex and rgb formats
