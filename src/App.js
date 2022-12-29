@@ -246,6 +246,7 @@ class App extends Component {
                                 Accepts both hex and rgb formats
                             </li>
                             <li className="bottom-container-section__item">Color picker</li>
+                            <li className="bottom-container-section__item">Multiple color lists</li>
                         </ul>
                     </div>
                     <div className="bottom-container-section  bottom-container-section--instructions">
