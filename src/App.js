@@ -32,8 +32,27 @@ class App extends Component {
             this.fetchColorLists(),
             this.fetchColorsForColorList(this.state.colorList),
         ]).finally(() => {
+            // Select a random color once all the colors have been loaded
+            this.updateColor(
+                '#' + ('000000' + ((Math.random() * 0xffffff) << 0).toString(16)).slice(-6)
+            );
             this.setState({ isLoading: false });
         });
+
+        // Setup a listener for the color picker
+        if (!Modernizr.inputtypes.color) {
+            this.setState({ isInputTypeSupported: false });
+            new jscolor(document.querySelector('.color-namer__color-input'));
+            document
+                .querySelector('.color-namer__color-input')
+                .setAttribute('onchange', 'updateColor(this.jscolor)');
+            window.updateColor = () => {
+                let color = tinycolor(
+                    document.querySelector('.color-namer__color-input').style['background-color']
+                ).toHexString();
+                this.updateColor(color);
+            };
+        }
     }
 
     fetchColorLists = () => {
@@ -57,7 +76,17 @@ class App extends Component {
                 return response.json();
             })
             .then((response) => {
-                this.getColors(response.colors);
+                let mappedColors = {};
+
+                for (const entry of response.colors) {
+                    mappedColors[entry.name] = entry.hex;
+                }
+
+                this.nearestColors = nearestColor.from(mappedColors);
+
+                this.setState({ isLoading: false });
+
+                this.colorInput.focus();
             });
     };
 
@@ -66,45 +95,14 @@ class App extends Component {
         const colorList = event.target.value;
         this.setState({ colorList });
         this.fetchColorsForColorList(colorList).finally(() => {
+            // Need to update the color in state with the new color list colors
+            this.updateColor(this.state.currentColor.hexValue);
             this.setState({ isLoading: false });
         });
     };
 
-    getColors = (colors) => {
-        let mappedColors = {};
-
-        for (const entry of colors) {
-            mappedColors[entry.name] = entry.hex;
-        }
-
-        this.nearestColors = nearestColor.from(mappedColors);
-
-        this.updateColor(
-            null,
-            '#' + ('000000' + ((Math.random() * 0xffffff) << 0).toString(16)).slice(-6)
-        );
-
-        this.setState({ isLoading: false });
-
-        if (!Modernizr.inputtypes.color) {
-            this.setState({ isInputTypeSupported: false });
-            new jscolor(document.querySelector('.color-namer__color-input'));
-            document
-                .querySelector('.color-namer__color-input')
-                .setAttribute('onchange', 'updateColor(this.jscolor)');
-            window.updateColor = (event) => {
-                let color = tinycolor(
-                    document.querySelector('.color-namer__color-input').style['background-color']
-                ).toHexString();
-                this.updateColor(event, color);
-            };
-        }
-
-        this.colorInput.focus();
-    };
-
-    updateColor = (event, value) => {
-        const colorValue = value || event.target.value;
+    updateColor = (value) => {
+        const colorValue = value;
 
         let validFormat =
             tinycolor(colorValue).getFormat() === 'name' ||
@@ -169,14 +167,18 @@ class App extends Component {
                                         <input
                                             className="color-namer__color-input"
                                             type="color"
-                                            onChange={this.updateColor}
+                                            onChange={(event) =>
+                                                this.updateColor(event.target.value)
+                                            }
                                             value={this.state.currentColor.hexValue}
                                         />
                                     ) : (
                                         <input
                                             className="color-namer__color-input"
                                             type="button"
-                                            onChange={this.updateColor}
+                                            onChange={(event) =>
+                                                this.updateColor(event.target.value)
+                                            }
                                             value={this.state.currentColor.hexValue}
                                         />
                                     )}
@@ -208,7 +210,7 @@ class App extends Component {
                         autoComplete="off"
                         autoCapitalize="off"
                         placeholder={this.state.currentColor.hexValue}
-                        onChange={this.updateColor}
+                        onChange={(event) => this.updateColor(event.target.value)}
                         ref={(input) => (this.colorInput = input)}
                     />
                     <div className="color-namer__lists">
