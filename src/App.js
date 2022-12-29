@@ -15,24 +15,67 @@ class App extends Component {
             hexValue: '',
             rgbValue: null,
         },
+        colorList: 'default',
         isInputTypeSupported: true,
+        possibleColorLists: ['default'],
+        listDescriptions: {
+            default: {
+                title: 'Default',
+                description: 'The default color list',
+                colorCount: 0,
+            },
+        },
     };
 
     componentDidMount() {
-        fetch('https://api.color.pizza/v1/')
+        Promise.all([
+            this.fetchColorLists(),
+            this.fetchColorsForColorList(this.state.colorList),
+        ]).finally(() => {
+            this.setState({ isLoading: false });
+        });
+    }
+
+    fetchColorLists = () => {
+        return fetch('https://api.color.pizza/v1/lists/')
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                this.setState({
+                    possibleColorLists: response.availableColorNameLists.filter((list) => {
+                        return list !== 'colors';
+                    }),
+                    listDescriptions: response.listDescriptions,
+                });
+            });
+    };
+
+    fetchColorsForColorList = (colorList) => {
+        return fetch(`https://api.color.pizza/v1/?list=${colorList}`)
             .then((response) => {
                 return response.json();
             })
             .then((response) => {
                 this.getColors(response.colors);
             });
-    }
+    };
+
+    setNewColorList = (event) => {
+        this.setState({ isLoading: true });
+        const colorList = event.target.value;
+        this.setState({ colorList });
+        this.fetchColorsForColorList(colorList).finally(() => {
+            this.setState({ isLoading: false });
+        });
+    };
 
     getColors = (colors) => {
         let mappedColors = {};
-        colors.forEach(function(entry) {
+
+        for (const entry of colors) {
             mappedColors[entry.name] = entry.hex;
-        });
+        }
 
         this.nearestColors = nearestColor.from(mappedColors);
 
@@ -84,6 +127,13 @@ class App extends Component {
         });
     };
 
+    formatColorListTitle = (list) => {
+        if (list === 'default') {
+            return 'Default';
+        }
+        return this.state.listDescriptions[list].title;
+    };
+
     render() {
         const Loader = () => (
             <div className="bouncing-loader">
@@ -101,7 +151,7 @@ class App extends Component {
                 >
                     <span className="github-badge">View the Code</span>
                 </a>
-                <h1 className="color-namer__title">Color Namer</h1>
+                <h1 className="color-namer__title">Color namer</h1>
                 <div className="color-namer__center-container">
                     {!this.state.isLoading ? (
                         <React.Fragment>
@@ -161,13 +211,34 @@ class App extends Component {
                         onChange={this.updateColor}
                         ref={(input) => (this.colorInput = input)}
                     />
+                    <div className="color-namer__lists">
+                        <label className="color-namer__list-label">
+                            <strong className="color-namer__list-label-text">Color list</strong>
+                            <select
+                                className="list-select"
+                                value={this.state.colorList}
+                                onChange={this.setNewColorList}
+                            >
+                                {this.state.possibleColorLists.map((list) => (
+                                    <option key={list} value={list}>
+                                        {this.formatColorListTitle(list)}
+                                        &nbsp;(
+                                        {this.state.listDescriptions[list].colorCount})
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                        <p className="color-namer__lists-description">
+                            {this.state.listDescriptions[this.state.colorList].description}
+                        </p>
+                    </div>
                 </div>
                 <div className="color-namer__bottom-container">
                     <div className="bottom-container-section  bottom-container-section--features">
                         <h3 className="bottom-container-section__title">Features</h3>
                         <ul className="bottom-container-section__list">
                             <li className="bottom-container-section__item">
-                                Over 15,000 color names
+                                Over 30,000 color names
                             </li>
                             <li className="bottom-container-section__item">
                                 Accepts both hex and rgb formats

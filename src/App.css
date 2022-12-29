@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 }
 
 html {
@@ -7,7 +8,6 @@ html {
 }
 
 body {
-    font-family: 'Nunito', sans-serif;
     font-size: 16px;
     letter-spacing: 0.6px;
 }
@@ -129,6 +129,7 @@ body {
     align-items: center;
     margin: 80px 0;
     height: 270px;
+    width: 100%;
 }
 
 @media (min-width: 700px) {
@@ -231,7 +232,7 @@ body {
     cursor: pointer;
 }
 
-.color-namer__value-label {
+.color-namer__value-label{
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 18px;
@@ -252,7 +253,7 @@ body {
     white-space: nowrap;
 }
 
-.color-input {
+.color-input{
     padding: 10px;
     letter-spacing: 1.6px;
     border: none;
@@ -266,9 +267,30 @@ body {
     border-radius: 0;
 }
 
+.list-select {
+    display: block;
+    width: 100%;
+    padding: 3px 0px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #6fffe9;
+    color: #fff5b2;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+.color-namer__list-label {
+    margin-top: 30px;
+    display: block;
+}
+
 @media (min-width: 700px) {
     .color-input {
         font-size: 20px;
+        letter-spacing: 1.6px;
+    }
+    .list-select {
+        font-size: 16px;
         letter-spacing: 1.6px;
     }
 }
@@ -293,6 +315,12 @@ body {
     }
 }
 
+.color-namer__list-label-text {
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.6px;
+}
+
 .bottom-container-section__title {
     font-weight: 400;
     font-size: 18px;
@@ -303,6 +331,12 @@ body {
     .bottom-container-section__title {
         font-size: 26px;
         letter-spacing: 1.2px;
+    }
+
+    .color-namer__list-label-text {
+        font-weight: 400;
+        font-size: 18px;
+        letter-spacing: 0.8px;
     }
 }
 
@@ -329,4 +363,17 @@ body {
 
 .bottom-container-section__link {
     color: #6fffe9;
+}
+
+.color-namer__lists {
+    width: 360px;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.color-namer__lists-description {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.4px;
+    margin: 1rem 0 0 0;
 }
