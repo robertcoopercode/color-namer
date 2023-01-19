@@ -31,7 +31,7 @@ Who the hell knows? 🤷‍"_
 ## Dependencies
 - **[nearest-color](https://github.com/dtao/nearest-color)** - Utility to find nearest matching color 
 - **[tinycolor2](https://github.com/bgrins/TinyColor)** - Color manipulation and conversion 
-- **[color-names](https://github.com/meodai/color-names)** - List of 15,000+ color names accessible through their API
+- **[color-names](https://github.com/meodai/color-names)** - List of 30,000+ color names accessible through their API
 - **[jscolor-picker](http://jscolor.com/)** - A color picker used when the browser doesn't support the native color picker display with `input[type='color']`
 
 ## Inspirations + Contributions
