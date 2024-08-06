@@ -3,7 +3,7 @@
 >"Naming colors has never been this easy!"
 > \- **_Abraham Lincoln_**
 
-A [web app](colornamer.netlify.com) that provides a name for a color. EZPZ.
+A [web app](https://colornamer.robertcooper.me/) that provides a name for a color. EZPZ.
 
 ![Example usage GIF](./example.gif)
 
