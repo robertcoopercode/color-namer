@@ -232,7 +232,7 @@ body {
     cursor: pointer;
 }
 
-.color-namer__value-label{
+.color-namer__value-label {
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 18px;
@@ -253,7 +253,7 @@ body {
     white-space: nowrap;
 }
 
-.color-input{
+.color-input {
     padding: 10px;
     letter-spacing: 1.6px;
     border: none;
@@ -277,6 +277,10 @@ body {
     color: #fff5b2;
     font-size: 16px;
     font-weight: 300;
+}
+
+.list-select option {
+    background-color: #0b132b;
 }
 
 .color-namer__list-label {
